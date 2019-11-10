@@ -41,7 +41,7 @@ const createWritableStore = (key, startValue, elementInitializer) => {
 let projects = [
     {
         id: shortid.generate(),
-        name: 'My Project in a store'
+        name: 'My Project'
     }
 ];
 
