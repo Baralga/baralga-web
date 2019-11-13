@@ -28,6 +28,8 @@ const createWritableStore = (key, startValue, elementInitializer) => {
                 if (Array.isArray(storedObject) && elementInitializer) {
                     storedObject.map(elementInitializer);
                     set(storedObject);
+                } else if (elementInitializer) {
+                    set(elementInitializer(storedObject));
                 }
             }
 
@@ -70,6 +72,37 @@ export const addActivity = (activity) => {
     activitiesStore.set(activities);
 }
 
+const filterInitializer = (filter) => {
+    filter.from = moment(filter.from);
+    filter.to = moment(filter.to);
+    return filter;
+};
+
+export const filteredActivitiesStore = createWritableStore('filteredActivities', []);
+let filter = {
+    timespan: "year",
+    from: moment().startOf("year"),
+    to: moment().endOf("year"),
+}
+export const filterStore = createWritableStore('filter', null, filterInitializer);
+filterStore.useLocalStorage();
+
+
+export const applyFilter = (filter) => {
+    let activities = get(activitiesStore).filter(
+        (activity) => activity.startTime.isBetween(filter.from, filter.to, null, '[)')
+    );
+    filteredActivitiesStore.set(activities);
+    filterStore.set(filter)
+}
+
+activitiesStore.subscribe(() => {
+    let filter = get(filterStore);
+    if (filter != null) {
+        applyFilter(filter);
+    }
+});
+
 export const addProject = (project) => {
     if (!project.id) {
         project.id = shortid.generate();
@@ -95,6 +128,6 @@ export const totalDuration = () => {
 
 export const totalDurationStore = writable(totalDuration());
 
-activitiesStore.subscribe(() => {
+filteredActivitiesStore.subscribe(() => {
     totalDurationStore.set(totalDuration());
 });
