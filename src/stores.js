@@ -84,7 +84,7 @@ let filter = {
     from: moment().startOf("year"),
     to: moment().endOf("year"),
 }
-export const filterStore = createWritableStore('filter', null, filterInitializer);
+export const filterStore = createWritableStore('filter', filter, filterInitializer);
 filterStore.useLocalStorage();
 
 
