@@ -113,11 +113,11 @@ export const addProject = (project) => {
 }
 
 export const totalDuration = () => {
-    if (get(activitiesStore).length == 0) {
+    if (get(filteredActivitiesStore).length == 0) {
         return moment.duration(0);
     }
 
-    let totalDuration = get(activitiesStore).map(
+    let totalDuration = get(filteredActivitiesStore).map(
         (activity) => moment.duration(activity.endTime.diff(activity.startTime))
     ).reduce((total, currentValue) => {
         return total.add(currentValue);
