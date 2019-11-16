@@ -5,6 +5,7 @@
   import { formatDuration, asFormattedDuration } from "./formatter.js";
   import Projects from "./Projects.svelte";
   import Report from "./Report.svelte";
+  import AddActivity from "./AddActivity.svelte";
 
   let runningActivity = false;
   let startTime;
@@ -56,6 +57,7 @@
   <div class="column is-12">
     <div class="field is-grouped">
       <Projects />
+      <AddActivity />
     </div>
   </div>
   <div class="column is-12 notification is-primary">
