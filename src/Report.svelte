@@ -1,10 +1,8 @@
 <script>
   import moment from "moment/src/moment";
   import {
-    activitiesStore,
     filterStore,
     filteredActivitiesStore,
-    totalDuration,
     totalDurationStore,
     applyFilter
   } from "./stores.js";
@@ -98,23 +96,23 @@
       </select>
     </div>
 
-    <a class="button" on:click={previousTimespan}>
+    <div class="button" on:click={previousTimespan}>
       <span class="icon is-medium">
         <i class="fa fa-angle-left" />
       </span>
-    </a>
+    </div>
 
-    <a class="button" on:click={resetTimespan}>
+    <div class="button" on:click={resetTimespan}>
       <span class="icon is-medium">
         <i class="fa fa-home" />
       </span>
-    </a>
+    </div>
 
-    <a class="button" on:click={nextTimespan}>
+    <div class="button" on:click={nextTimespan}>
       <span class="icon is-medium">
         <i class="fa fa-angle-right" />
       </span>
-    </a>
+    </div>
   </div>
   <div class="column is-3">
     <fieldset disabled>

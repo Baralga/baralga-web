@@ -1,8 +1,7 @@
 <script>
   import moment from "moment/src/moment";
-  import { writable, get } from "svelte/store";
-  import { activitiesStore, projectStore, totalDuration, addActivity } from "./stores.js";
-  import { formatDuration, asFormattedDuration } from "./formatter.js";
+  import { projectStore, addActivity } from "./stores.js";
+  import { formatDuration } from "./formatter.js";
   import Projects from "./Projects.svelte";
   import Report from "./Report.svelte";
   import AddActivity from "./AddActivity.svelte";
@@ -64,17 +63,17 @@
     <div class="columns is-multiline">
       <div class="column is-4">
         {#if runningActivity}
-          <a on:click={stopActivity} class="button is-large">
+          <div  on:click={stopActivity} class="button is-large">
             <span class="icon is-medium">
               <i class="fa fa-stop" />
             </span>
-          </a>
+          </div>
         {:else}
-          <a on:click={startActivity} class="button is-large">
+          <div on:click={startActivity} class="button is-large">
             <span class="icon is-medium">
               <i class="fa fa-play" />
             </span>
-          </a>
+          </div>
         {/if}
 
         <div class="select is-large">
