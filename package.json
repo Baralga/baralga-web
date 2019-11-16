@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "bulma": "^0.7.5",
+    "file-saver": "^2.0.2",
     "moment": "^2.24.0",
     "shortid": "^2.2.15",
     "sirv-cli": "^0.4.4"
