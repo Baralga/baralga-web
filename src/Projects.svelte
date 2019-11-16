@@ -1,5 +1,4 @@
 <script>
-  import { writable, get } from "svelte/store";
   import { projectStore, deleteProject, addProject } from "./stores.js";
 
   let name = "";
@@ -58,11 +57,11 @@
           </div>
           <div class="field">
             <p class="control">
-              <a class="button" on:click={add}>
+              <span class="button" on:click={add}>
                 <span class="icon is-medium">
                   <i class="fa fa-plus" />
                 </span>
-              </a>
+              </span>
             </p>
           </div>
         </div>
@@ -70,22 +69,16 @@
 
       <nav class="panel">
         {#each $projectStore as project}
-          <a class="panel-block">
+          <div class="panel-block">
             <span class="panel-icon" on:click={() => deleteProject(project)}>
               <i class="fas fa-trash" aria-hidden="true" />
             </span>
             {project.name}
-          </a>
+          </div>
         {/each}
       </nav>
 
     </section>
-    <!--
-    <footer class="modal-card-foot">
-      <button class="button is-success" on:click={add}>Save</button>
-      <button class="button" on:click={cancel}>Cancel</button>
-    </footer>
-    -->
   </div>
 
   <button class="modal-close is-large" aria-label="close" />

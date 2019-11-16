@@ -1,6 +1,5 @@
 <script>
   import moment from "moment/src/moment";
-  import { writable, get } from "svelte/store";
   import { projectStore, addActivity } from "./stores.js";
 
   let selectedProject;
