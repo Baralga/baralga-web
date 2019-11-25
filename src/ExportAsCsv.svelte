@@ -1,8 +1,9 @@
 <script>
   import FileSaver from "file-saver/src/FileSaver";
-  import { filteredActivitiesStore, toFilterLabel } from "./stores.js";
+  import { filteredActivitiesStore, filterStore } from "./stores.js";
+  import { asFilterLabel, asFormattedDuration } from "./formatter.js";
 
-  const CSV_HEADER = ["Date", "Start", "End", "Project", "Description"]
+  const CSV_HEADER = ["Date", "Start", "End", "Duration", "Project", "Description"]
     .join(";")
     .concat("\n");
 
@@ -12,6 +13,7 @@
         activity.startTime.format("DD.MM.YYYY"),
         activity.startTime.format("HH:mm"),
         activity.endTime.format("HH:mm"),
+        asFormattedDuration(activity.startTime, activity.endTime),
         activity.project.name,
         activity.description
       ]
@@ -22,7 +24,7 @@
     let blob = new Blob([CSV_HEADER, ...activities], {
       type: "text/csv;charset=utf-8"
     });
-    FileSaver.saveAs(blob, "Activities-" + toFilterLabel() + ".csv");
+    FileSaver.saveAs(blob, "Activities-" + asFilterLabel($filterStore) + ".csv");
   }
 </script>
 
