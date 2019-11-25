@@ -121,9 +121,22 @@ export const totalDuration = () => {
         (activity) => moment.duration(activity.endTime.diff(activity.startTime))
     ).reduce((total, currentValue) => {
         return total.add(currentValue);
-      });
+    });
 
     return totalDuration;
+}
+
+export const toFilterLabel = (filterParam) => {
+    filter = (filterParam ? filterParam : get(filterStore));
+
+    switch (filter.timespan) {
+        case "year":
+            return filter.from.format("YYYY");
+        case "month":
+            return filter.from.format("YYYY MMMM");
+        default:
+            return "?";
+    };
 }
 
 export const totalDurationStore = writable(totalDuration());

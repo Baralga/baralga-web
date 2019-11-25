@@ -5,6 +5,8 @@
   import Projects from "./Projects.svelte";
   import Report from "./Report.svelte";
   import AddActivity from "./AddActivity.svelte";
+  import ExportAsCsv from "./ExportAsCsv.svelte";
+
 
   let runningActivity = false;
   let startTime;
@@ -57,6 +59,7 @@
     <div class="field is-grouped">
       <Projects />
       <AddActivity />
+      <ExportAsCsv />
     </div>
   </div>
   <div class="column is-12 notification is-primary">

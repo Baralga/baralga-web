@@ -4,7 +4,8 @@
     filterStore,
     filteredActivitiesStore,
     totalDurationStore,
-    applyFilter
+    applyFilter,
+    toFilterLabel
   } from "./stores.js";
   import { formatDuration, asFormattedDuration } from "./formatter.js";
 
@@ -15,20 +16,13 @@
   let timespanTo;
 
   function updateFilter() {
-    switch (selectedTimespan) {
-      case "year":
-        filterLabel = timespanFrom.format("YYYY");
-        break;
-      case "month":
-        filterLabel = timespanFrom.format("YYYY MMMM");
-        break;
-    }
-
     let filter = {
       timespan: selectedTimespan,
       from: timespanFrom,
       to: timespanTo
     };
+
+    filterLabel = toFilterLabel(filter);
 
     applyFilter(filter);
   }
