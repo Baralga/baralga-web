@@ -14,6 +14,17 @@ export const formatDuration = (duration) => {
   );
 };
 
+export const asFilterLabel = (filter) => {
+  switch (filter.timespan) {
+      case "year":
+          return filter.from.format("YYYY");
+      case "month":
+          return filter.from.format("YYYY MMMM");
+      default:
+          return "?";
+  }
+}
+
 export const asFormattedDuration = (from, to) => {
   let duration = moment.duration(to.diff(from));
   return formatDuration(duration);

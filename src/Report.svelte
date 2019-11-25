@@ -4,10 +4,9 @@
     filterStore,
     filteredActivitiesStore,
     totalDurationStore,
-    applyFilter,
-    toFilterLabel
+    applyFilter
   } from "./stores.js";
-  import { formatDuration, asFormattedDuration } from "./formatter.js";
+  import { formatDuration, asFormattedDuration, asFilterLabel } from "./formatter.js";
 
   let selectedTimespan = "year";
   let filterLabel = "";
@@ -22,7 +21,7 @@
       to: timespanTo
     };
 
-    filterLabel = toFilterLabel(filter);
+    filterLabel = asFilterLabel(filter);
 
     applyFilter(filter);
   }
