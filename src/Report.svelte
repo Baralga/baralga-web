@@ -119,7 +119,7 @@
     </fieldset>
   </div>
   <div class="column is-12">
-    {#if $filteredActivitiesStore.length > 1}
+    {#if $filteredActivitiesStore.length > 0}
       <table class="table is-striped is-hoverable is-fullwidth">
         <thead>
           <tr>
