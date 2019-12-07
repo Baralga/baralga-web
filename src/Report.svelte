@@ -80,8 +80,6 @@
 
 </style>
 
-<h1>TEST</h1>
-
 <div class="columns is-multiline">
   <div class="column is-3">
     <div class="select">
