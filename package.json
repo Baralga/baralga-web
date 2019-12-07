@@ -1,31 +1,34 @@
 {
-  "name": "svelte-app",
+  "name": "baralga-web",
   "version": "1.0.0",
+  "description": "Simple and lightweight time tracking in the browser.",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build --no-source-maps src/index.html"
+  },
+  "browserslist": [
+    "last 1 chrome versions"
+  ],
+  "main": "index.js",
+  "author": "Jan Stamer",
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
   "devDependencies": {
-    "eslint": "^6.6.0",
-    "eslint-plugin-svelte3": "^2.7.3",
-    "npm-run-all": "^4.1.5",
-    "rollup": "^1.12.0",
-    "rollup-plugin-commonjs": "^10.0.0",
-    "rollup-plugin-eslint": "^7.0.0",
-    "rollup-plugin-livereload": "^1.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-svelte": "^5.0.3",
-    "rollup-plugin-terser": "^4.0.4",
-    "svelte": "^3.1.13"
+    "@fortawesome/fontawesome-free": "^5.11.2",
+    "bulma": "^0.8.0",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-svelte": "^4.0.5",
+    "sass": "^1.23.7",
+    "svelte": "^3.16.0"
   },
   "dependencies": {
-    "bulma": "^0.7.5",
     "file-saver": "^2.0.2",
     "moment": "^2.24.0",
-    "shortid": "^2.2.15",
-    "sirv-cli": "^0.4.4"
-  },
-  "scripts": {
-    "build": "rollup -c",
-    "autobuild": "rollup -c -w",
-    "dev": "run-p start:dev autobuild",
-    "start": "sirv public --single",
-    "start:dev": "sirv public --single --dev"
+    "shortid": "^2.2.15"
   }
 }
