@@ -84,9 +84,12 @@
 
 </style>
 
-<p class="control">
-  <button class="button is-link" on:click={show}>Add Activity</button>
-</p>
+<button class="button is-link" on:click={show}>
+  <span class="icon">
+    <i class="fas fa-plus" />
+  </span>
+  <span>Add Activity</span>
+</button>
 
 <div
   class="{addActivityModalVisible === true ? 'is-active' : ''} modal is-clipped">

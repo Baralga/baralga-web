@@ -118,6 +118,7 @@
       </div>
     </fieldset>
   </div>
+
   <div class="column is-12">
     {#if $filteredActivitiesStore.length > 0}
       <table class="table is-striped is-hoverable is-fullwidth">
@@ -154,7 +155,7 @@
         </tbody>
       </table>
     {:else}
-      <div class="notification is-info">No activities in this period.</div>
+      <span>No activities in this period.</span>
     {/if}
 
   </div>

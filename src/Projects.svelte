@@ -31,9 +31,12 @@
 
 </style>
 
-<p class="control">
-  <button class="button is-link" on:click={show}>Manage Projects</button>
-</p>
+<button class="button is-link" on:click={show}>
+  <span class="icon">
+    <i class="fas fa-edit" />
+  </span>
+  <span>Manage Project</span>
+</button>
 
 <div class="{projectModalVisible === true ? 'is-active' : ''} modal is-clipped">
   <div class="modal-background" />
@@ -70,7 +73,7 @@
       <nav class="panel">
         {#each $projectStore as project}
           <div class="panel-block">
-            <span class="panel-icon" on:click={() => deleteProject(project)}>
+            <span class="panel-icon" title="Delete {project.name}" on:click={() => deleteProject(project)}>
               <i class="fas fa-trash" aria-hidden="true" />
             </span>
             {project.name}

@@ -3,7 +3,14 @@
   import { filteredActivitiesStore, filterStore } from "./stores.js";
   import { asFilterLabel, asFormattedDuration } from "./formatter.js";
 
-  const CSV_HEADER = ["Date", "Start", "End", "Duration", "Project", "Description"]
+  const CSV_HEADER = [
+    "Date",
+    "Start",
+    "End",
+    "Duration",
+    "Project",
+    "Description"
+  ]
     .join(";")
     .concat("\n");
 
@@ -24,15 +31,19 @@
     let blob = new Blob([CSV_HEADER, ...activities], {
       type: "text/csv;charset=utf-8"
     });
-    FileSaver.saveAs(blob, "Activities-" + asFilterLabel($filterStore) + ".csv");
+    FileSaver.saveAs(
+      blob,
+      "Activities-" + asFilterLabel($filterStore) + ".csv"
+    );
   }
 </script>
 
-<p class="control">
-  <span class="button is-link" on:click={exportCsv}>
-    <span class="icon">
-      <i class="fas fa-file-csv"></i>
-    </span>
-    <span>Export as <abbr title="Comma Separated Values">CSV</abbr></span>
+<button class="button is-link" on:click={exportCsv}>
+  <span class="icon">
+    <i class="fas fa-file-csv" />
   </span>
-</p>
+  <span>
+    Export as
+    <abbr title="Comma Separated Values">CSV</abbr>
+  </span>
+</button>

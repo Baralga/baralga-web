@@ -56,7 +56,7 @@
 
 <div class="columns is-multiline">
   <div class="column is-12">
-    <div class="field is-grouped">
+    <div class="buttons">
       <Projects />
       <AddActivity />
       <ExportAsCsv />
