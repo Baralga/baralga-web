@@ -6,7 +6,11 @@
     totalDurationStore,
     applyFilter
   } from "./stores.js";
-  import { formatDuration, asFormattedDuration, asFilterLabel } from "./formatter.js";
+  import {
+    formatDuration,
+    asFormattedDuration,
+    asFilterLabel
+  } from "./formatter.js";
 
   let selectedTimespan = "year";
   let filterLabel = "";
@@ -81,7 +85,7 @@
 </style>
 
 <div class="columns is-multiline">
-  <div class="column is-3">
+  <div class="column is-4">
     <div class="select">
       <select bind:value={selectedTimespan} on:change={resetTimespan}>
         <option value="month">Month</option>
@@ -107,7 +111,8 @@
       </span>
     </div>
   </div>
-  <div class="column is-3">
+
+  <div class="column is-3 is-hidden-mobile">
     <fieldset disabled>
       <div class="control">
         <input
@@ -119,8 +124,56 @@
     </fieldset>
   </div>
 
-  <div class="column is-12">
-    {#if $filteredActivitiesStore.length > 0}
+  {#if $filteredActivitiesStore.length > 0}
+    {#each $filteredActivitiesStore as activity}
+      <div class="column is-12 is-hidden-desktop">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              {activity.startTime.format('DD.MM.YYYY')}
+            </p>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              <div class="columns is-mobile">
+                <div class="column is-4">{activity.project.name}</div>
+                <div class="column is-5">
+                  {activity.startTime.format('HH:mm')} - {activity.endTime.format('HH:mm')}
+                </div>
+                <div class="column is-3">
+                  {asFormattedDuration(activity.startTime, activity.endTime)} h
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--
+          <footer class="card-footer">
+            <a href="#" class="card-footer-item">Save</a>
+          </footer>
+          -->
+        </div>
+      </div>
+    {/each}
+    <div class="column is-12 is-hidden-desktop">
+      <div class="card">
+        <header class="card-header">
+          <div class="card-header-title columns is-mobile">
+            <div class="column is-8" />
+            <div class="column is-1">Total:</div>
+            <div class="column is-3">
+              {formatDuration($totalDurationStore)} h
+            </div>
+          </div>
+        </header>
+        <!--
+          <footer class="card-footer">
+            <a href="#" class="card-footer-item">Save</a>
+          </footer>
+          -->
+      </div>
+    </div>
+
+    <div class="column is-12 is-hidden-mobile">
       <table class="table is-striped is-hoverable is-fullwidth">
         <thead>
           <tr>
@@ -154,9 +207,11 @@
           {/each}
         </tbody>
       </table>
-    {:else}
+    </div>
+  {:else}
+    <div class="column is-12">
       <span>No activities in this period.</span>
-    {/if}
+    </div>
+  {/if}
 
-  </div>
 </div>
