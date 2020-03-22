@@ -158,8 +158,8 @@
       <div class="card">
         <header class="card-header">
           <div class="card-header-title columns is-mobile">
-            <div class="column is-8" />
-            <div class="column is-1">Total:</div>
+            <div class="column is-6" />
+            <div class="column is-3">Total:</div>
             <div class="column is-3">
               {formatDuration($totalDurationStore)} h
             </div>
