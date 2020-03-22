@@ -81,6 +81,9 @@
 </script>
 
 <style>
+  .nowrap {
+    white-space: nowrap;
+  }
 
 </style>
 
@@ -140,7 +143,7 @@
                 <div class="column is-5">
                   {activity.startTime.format('HH:mm')} - {activity.endTime.format('HH:mm')}
                 </div>
-                <div class="column is-3">
+                <div class="column is-3 nowrap">
                   {asFormattedDuration(activity.startTime, activity.endTime)} h
                 </div>
               </div>
@@ -160,7 +163,7 @@
           <div class="card-header-title columns is-mobile">
             <div class="column is-6" />
             <div class="column is-3">Total:</div>
-            <div class="column is-3">
+            <div class="column is-3 nowrap">
               {formatDuration($totalDurationStore)} h
             </div>
           </div>
