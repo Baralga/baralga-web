@@ -184,7 +184,7 @@
             <th>Date</th>
             <th>Start</th>
             <th>End</th>
-            <th>Duration</th>
+            <th align="right">Duration</th>
           </tr>
         </thead>
         <tfoot>
@@ -193,7 +193,7 @@
             <th />
             <th />
             <th />
-            <th align="right">Total: {formatDuration($totalDurationStore)}</th>
+            <th align="right" class="nowrap">Total: {formatDuration($totalDurationStore)} h</th>
           </tr>
         </tfoot>
         <tbody>
@@ -203,8 +203,8 @@
               <td>{activity.startTime.format('DD.MM.YYYY')}</td>
               <td>{activity.startTime.format('HH:mm')}</td>
               <td>{activity.endTime.format('HH:mm')}</td>
-              <td align="right">
-                {asFormattedDuration(activity.startTime, activity.endTime)}
+              <td align="right" class="nowrap">
+                {asFormattedDuration(activity.startTime, activity.endTime)} h
               </td>
             </tr>
           {/each}
