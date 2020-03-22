@@ -84,11 +84,17 @@
 
 </style>
 
-<button class="button is-link" on:click={show}>
+<button class="button is-link is-hidden-mobile" on:click={show}>
   <span class="icon">
     <i class="fas fa-plus" />
   </span>
   <span>Add Activity</span>
+</button>
+
+<button class="button is-link is-hidden-desktop" on:click={show}>
+  <span class="icon">
+    <i class="fas fa-plus" />
+  </span>
 </button>
 
 <div

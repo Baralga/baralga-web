@@ -31,11 +31,17 @@
 
 </style>
 
-<button class="button is-link" on:click={show}>
+<button class="button is-link is-hidden-mobile" on:click={show}>
   <span class="icon">
     <i class="fas fa-edit" />
   </span>
   <span>Manage Project</span>
+</button>
+
+<button class="button is-link is-hidden-desktop" on:click={show}>
+  <span class="icon">
+    <i class="fas fa-edit" />
+  </span>
 </button>
 
 <div class="{projectModalVisible === true ? 'is-active' : ''} modal is-clipped">
