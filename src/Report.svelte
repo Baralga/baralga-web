@@ -107,11 +107,11 @@
   <div class="column is-4">
     <div class="select">
       <select bind:value={selectedTimespan} on:change={resetTimespan}>
-        <option value="week">Week</option>
+        <option value="week">Week 2</option>
         <option value="month">Month</option>
         <option value="quarter">Quarter</option>
         <option value="year">Year</option>
-      </select>
+      </select> 
     </div>
 
     <div class="button" on:click={previousTimespan}>
