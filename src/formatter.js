@@ -18,8 +18,12 @@ export const asFilterLabel = (filter) => {
   switch (filter.timespan) {
       case "year":
           return filter.from.format("YYYY");
+      case "quarter":
+          return filter.from.format("Qo") + " Quarter";
       case "month":
           return filter.from.format("YYYY MMMM");
+      case "week":
+          return filter.from.format("wo") + " Week";
       default:
           return "?";
   }

@@ -36,9 +36,17 @@
         timespanFrom = moment().startOf("year");
         timespanTo = moment().endOf("year");
         break;
+      case "quarter":
+        timespanFrom = moment().startOf("quarter");
+        timespanTo = moment().endOf("quarter");
+        break;
       case "month":
         timespanFrom = moment().startOf("month");
         timespanTo = moment().endOf("month");
+        break;
+      case "week":
+        timespanFrom = moment().startOf("week");
+        timespanTo = moment().endOf("week");
         break;
     }
 
@@ -51,9 +59,17 @@
         timespanFrom = timespanFrom.add(diffToMove, "years");
         timespanTo = timespanTo.add(diffToMove, "years");
         break;
+      case "quarter":
+        timespanFrom = timespanFrom.add(diffToMove, "quarters");
+        timespanTo = timespanTo.add(diffToMove, "quarters");
+        break;
       case "month":
         timespanFrom = timespanFrom.add(diffToMove, "months");
         timespanTo = timespanTo.add(diffToMove, "months");
+        break;
+      case "week":
+        timespanFrom = timespanFrom.add(diffToMove, "weeks");
+        timespanTo = timespanTo.add(diffToMove, "weeks");
         break;
     }
     updateFilter();
@@ -91,7 +107,9 @@
   <div class="column is-4">
     <div class="select">
       <select bind:value={selectedTimespan} on:change={resetTimespan}>
+        <option value="week">Week</option>
         <option value="month">Month</option>
+        <option value="quarter">Quarter</option>
         <option value="year">Year</option>
       </select>
     </div>
