@@ -4,8 +4,7 @@
   "description": "Simple and lightweight time tracking in the browser.",
   "scripts": {
     "dev": "parcel src/index.html",
-    "build": "parcel build --no-source-maps src/index.html src/manifest.webmanifest",
-    "postbuild": "workbox generateSW"
+    "build": "parcel build --no-source-maps src/index.html src/manifest.webmanifest"
   },
   "browserslist": [
     "last 1 chrome versions"
@@ -25,8 +24,7 @@
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-svelte": "^4.0.6",
     "sass": "^1.26.2",
-    "svelte": "^3.19.2",
-    "workbox-cli": "^5.1.1"
+    "svelte": "^3.19.2"
   },
   "dependencies": {
     "file-saver": "^2.0.2",
