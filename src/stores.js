@@ -51,6 +51,9 @@ export const projectStore = createWritableStore('projects', projects);
 projectStore.useLocalStorage();
 
 const activityInitializer = (activity) => {
+    if (!activity.id) {
+        activity.id = shortid.generate();
+    }
     activity.startTime = moment(activity.startTime);
     activity.endTime = moment(activity.endTime);
     return activity;
@@ -68,6 +71,9 @@ export const deleteProject = (project) => {
 }
 
 export const addActivity = (activity) => {
+    if (!activity.id) {
+        activity.id = shortid.generate();
+    }
     let activities = [...get(activitiesStore), activity];
     activitiesStore.set(activities);
 }
