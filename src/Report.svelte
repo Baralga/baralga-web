@@ -101,58 +101,77 @@
     white-space: nowrap;
   }
 
+  .report-filter > div {
+    margin-right: 0.5em;
+  }
 </style>
 
 <div class="columns is-multiline">
-  <div class="column is-4">
-    <div class="select">
-      <select bind:value={selectedTimespan} on:change={resetTimespan}>
-        <option value="week">Week 2</option>
-        <option value="month">Month</option>
-        <option value="quarter">Quarter</option>
-        <option value="year">Year</option>
-      </select> 
-    </div>
 
-    <div class="button" on:click={previousTimespan}>
-      <span class="icon is-medium">
-        <i class="fa fa-angle-left" />
-      </span>
-    </div>
+  <div class="column is-12">
+    <nav class="level ">
+      <div class="level-left">
+        <div class="level-item report-filter">
 
-    <div class="button" on:click={resetTimespan}>
-      <span class="icon is-medium">
-        <i class="fa fa-home" />
-      </span>
-    </div>
+          <div class="select">
+            <select bind:value={selectedTimespan} on:change={resetTimespan}>
+              <option value="week">Week</option>
+              <option value="month">Month</option>
+              <option value="quarter">Quarter</option>
+              <option value="year">Year</option>
+            </select>
+          </div>
 
-    <div class="button" on:click={nextTimespan}>
-      <span class="icon is-medium">
-        <i class="fa fa-angle-right" />
-      </span>
-    </div>
-  </div>
+          <div class="button" on:click={previousTimespan}>
+            <span class="icon is-medium">
+              <i class="fa fa-angle-left" />
+            </span>
+          </div>
 
-  <div class="column is-3 is-hidden-mobile">
-    <fieldset disabled>
-      <div class="control">
-        <input
-          class="input"
-          type="text"
-          placeholder=""
-          bind:value={filterLabel} />
+          <div class="button" on:click={resetTimespan}>
+            <span class="icon is-medium">
+              <i class="fa fa-home" />
+            </span>
+          </div>
+
+          <div class="button" on:click={nextTimespan}>
+            <span class="icon is-medium">
+              <i class="fa fa-angle-right" />
+            </span>
+          </div>
+        </div>
+
       </div>
-    </fieldset>
+
+      <div class="level-right">
+        <fieldset disabled>
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              placeholder=""
+              bind:value={filterLabel} />
+          </div>
+        </fieldset>
+      </div>
+    </nav>
   </div>
 
   {#if $filteredActivitiesStore.length > 0}
     {#each $filteredActivitiesStore as activity}
-      <div class="column is-12 is-hidden-desktop">
+      <div class="column is-12">
         <div class="card">
           <header class="card-header">
             <p class="card-header-title">
               {activity.startTime.format('DD.MM.YYYY')}
             </p>
+            <!--
+            <a href="#" class="card-header-icon" aria-label="more options">
+              <span class="icon">
+                <i class="fas fa-edit" aria-hidden="true"></i>
+              </span>
+            </a>
+            -->
           </header>
           <div class="card-content">
             <div class="content">
@@ -175,7 +194,7 @@
         </div>
       </div>
     {/each}
-    <div class="column is-12 is-hidden-desktop">
+    <div class="column is-12">
       <div class="card">
         <header class="card-header">
           <div class="card-header-title columns is-mobile">
@@ -192,42 +211,6 @@
           </footer>
           -->
       </div>
-    </div>
-
-    <div class="column is-12 is-hidden-mobile">
-      <table class="table is-striped is-hoverable is-fullwidth">
-        <thead>
-          <tr>
-            <th>Project</th>
-            <th>Date</th>
-            <th>Start</th>
-            <th>End</th>
-            <th align="right">Duration</th>
-          </tr>
-        </thead>
-        <tfoot>
-          <tr>
-            <th />
-            <th />
-            <th />
-            <th />
-            <th align="right" class="nowrap">Total: {formatDuration($totalDurationStore)} h</th>
-          </tr>
-        </tfoot>
-        <tbody>
-          {#each $filteredActivitiesStore as activity}
-            <tr title={activity.description}>
-              <td>{activity.project.name}</td>
-              <td>{activity.startTime.format('DD.MM.YYYY')}</td>
-              <td>{activity.startTime.format('HH:mm')}</td>
-              <td>{activity.endTime.format('HH:mm')}</td>
-              <td align="right" class="nowrap">
-                {asFormattedDuration(activity.startTime, activity.endTime)} h
-              </td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
     </div>
   {:else}
     <div class="column is-12">

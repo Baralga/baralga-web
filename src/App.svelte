@@ -55,6 +55,7 @@
 </style>
 
 <div class="columns is-multiline">
+
   <div class="column is-12">
     <div class="buttons">
       <Projects />
@@ -62,6 +63,7 @@
       <ExportAsCsv />
     </div>
   </div>
+
   <div class="column is-12 notification is-primary">
     <div class="columns is-multiline">
       <div class="column is-4">
@@ -105,7 +107,7 @@
       </div>
     </div>
   </div>
-  <div class="column is-12 notification">
+  <div class="column is-12">
     <Report/>
   </div>
 </div>
