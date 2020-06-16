@@ -1,6 +1,7 @@
 <script>
   import moment from "moment/src/moment";
   import { projectStore, addActivity } from "./stores.js";
+  import { navigate } from "svelte-routing";
 
   let selectedProject;
   let dateValue;
@@ -30,15 +31,8 @@
   $: isValidTimeTo =
     validateTime(timeToValue) && validateAfter(timeFromValue, timeToValue);
 
-  let addActivityModalVisible = false;
-
-  function show() {
-    reset();
-    addActivityModalVisible = true;
-  }
-
   function hide() {
-    addActivityModalVisible = false;
+     navigate("/", { replace: true });
   }
 
   function add() {
@@ -78,140 +72,119 @@
   function cancel() {
     hide();
   }
+
+  reset();
 </script>
 
 <style>
 
 </style>
 
-<button class="button is-link is-hidden-mobile" on:click={show}>
-  <span class="icon">
-    <i class="fas fa-plus" />
-  </span>
-  <span>Add Activity</span>
-</button>
+<h1 class="title">Add Activity</h1>
 
-<button class="button is-link is-hidden-desktop" on:click={show}>
-  <span class="icon">
-    <i class="fas fa-plus" />
-  </span>
-</button>
-
-<div
-  class="{addActivityModalVisible === true ? 'is-active' : ''} modal is-clipped">
-  <div class="modal-background" />
-
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">Add Activity</p>
-      <button class="delete" aria-label="close" on:click={cancel} />
-    </header>
-    <section class="modal-card-body">
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Project</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="select">
-              <select bind:value={selectedProject}>
-                {#each $projectStore as project}
-                  <option value={project}>{project.name}</option>
-                {/each}
-              </select>
-            </div>
-          </div>
-        </div>
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Project</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <div class="select">
+        <select bind:value={selectedProject}>
+          {#each $projectStore as project}
+            <option value={project}>{project.name}</option>
+          {/each}
+        </select>
       </div>
+    </div>
+  </div>
+</div>
 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Date</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input
-                pattern="[0-3][0-9]\.[0-1][0-9]\.20[0-9]{2}"
-                minlength="10"
-                maxlength="10"
-                class="input"
-                class:is-danger={!isValidDateValue}
-                bind:value={dateValue}
-                type="text"
-                placeholder="16.11.2019" />
-            </div>
-            <!--
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Date</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <div class="control">
+        <input
+          pattern="[0-3][0-9]\.[0-1][0-9]\.20[0-9]{2}"
+          minlength="10"
+          maxlength="10"
+          class="input"
+          class:is-danger={!isValidDateValue}
+          bind:value={dateValue}
+          type="text"
+          placeholder="16.11.2019" />
+      </div>
+      <!--
             <p class="help is-danger">This field is required</p>
             -->
-          </div>
-        </div>
-      </div>
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Start Time</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <input
-              class="input"
-              pattern="[0-9]{2}:[0-5][0-9]"
-              bind:value={timeFromValue}
-              class:is-danger={!isValidTimeFrom}
-              minlength="5"
-              maxlength="5"
-              type="text"
-              placeholder="10:00" />
-          </div>
-        </div>
-      </div>
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">End Time</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <input
-              class="input"
-              pattern="[0-9]{2}:[0-5][0-9]"
-              bind:value={timeToValue}
-              class:is-danger={!isValidTimeTo}
-              minlength="5"
-              maxlength="5"
-              type="text"
-              placeholder="10:00" />
-          </div>
-        </div>
-      </div>
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Description</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <textarea
-              bind:value={description}
-              class="textarea"
-              placeholder="Describe what you do ..." />
-          </div>
-        </div>
-      </div>
-
-    </section>
-    <footer class="modal-card-foot">
-      <button
-        class="button is-success"
-        disabled={!(isValidDateValue && isValidTimeFrom && isValidTimeTo)}
-        on:click={add}>
-        Add
-      </button>
-      <button class="button" on:click={cancel}>Cancel</button>
-    </footer>
+    </div>
   </div>
+</div>
 
-  <button class="modal-close is-large" aria-label="close" />
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Start Time</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <input
+        class="input"
+        pattern="[0-9]{2}:[0-5][0-9]"
+        bind:value={timeFromValue}
+        class:is-danger={!isValidTimeFrom}
+        minlength="5"
+        maxlength="5"
+        type="text"
+        placeholder="10:00" />
+    </div>
+  </div>
+</div>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">End Time</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <input
+        class="input"
+        pattern="[0-9]{2}:[0-5][0-9]"
+        bind:value={timeToValue}
+        class:is-danger={!isValidTimeTo}
+        minlength="5"
+        maxlength="5"
+        type="text"
+        placeholder="10:00" />
+    </div>
+  </div>
+</div>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Description</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <textarea
+        bind:value={description}
+        class="textarea"
+        placeholder="Describe what you do ..." />
+    </div>
+  </div>
+</div>
+
+<div class="field">
+  <p class="control">
+
+    <button
+      class="button is-success"
+      disabled={!(isValidDateValue && isValidTimeFrom && isValidTimeTo)}
+      on:click={add}>
+      Add
+    </button>
+    <button class="button" on:click={cancel}>Cancel</button>
+
+  </p>
 </div>
