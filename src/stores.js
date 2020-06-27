@@ -78,6 +78,20 @@ export const addActivity = (activity) => {
     activitiesStore.set(activities);
 }
 
+export const updateActivity = (activity) => {
+    let activityToUpdate = get(activitiesStore).find(a => a.id === activity.id);
+    if (!activityToUpdate) {
+        return;
+    }
+
+    let activities = [...get(activitiesStore).filter(a => a !== activityToUpdate), activity];
+    activitiesStore.set(activities);
+}
+
+export const getActivity = (id) => {
+    return get(activitiesStore).find((activity) => activity.id === id)
+}
+
 const filterInitializer = (filter) => {
     filter.from = moment(filter.from);
     filter.to = moment(filter.to);
@@ -95,9 +109,13 @@ filterStore.useLocalStorage();
 
 
 export const applyFilter = (filter) => {
-    let activities = get(activitiesStore).filter(
-        (activity) => activity.startTime.isBetween(filter.from, filter.to, null, '[)')
-    );
+    let activities = get(activitiesStore)
+        .filter(
+            (activity) => activity.startTime.isBetween(filter.from, filter.to, null, '[)')
+        ).sort(
+            // Order by start time ascending
+            (a, b) => (a.startTime.valueOf() - b.startTime.valueOf()) * -1
+        );
     filteredActivitiesStore.set(activities);
     filterStore.set(filter)
 }
@@ -116,6 +134,10 @@ export const addProject = (project) => {
 
     let projects = [...get(projectStore), project];
     projectStore.set(projects);
+}
+
+export const getProject = (id) => {
+    return get(projectStore).find((project) => id === project.id)
 }
 
 export const totalDuration = () => {

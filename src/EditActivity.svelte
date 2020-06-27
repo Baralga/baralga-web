@@ -1,8 +1,11 @@
 <script>
+  import { Router, Link, Route } from "svelte-routing";
   import moment from "moment/src/moment";
-  import { projectStore, addActivity } from "./stores.js";
+  import { projectStore, getProject, addActivity, updateActivity, getActivity } from "./stores.js";
   import { navigate } from "svelte-routing";
+  import EditActivity from "./EditActivity.svelte";
 
+  export let id = undefined;
   let selectedProject;
   let dateValue;
   let timeFromValue;
@@ -31,11 +34,15 @@
   $: isValidTimeTo =
     validateTime(timeToValue) && validateAfter(timeFromValue, timeToValue);
 
-  function hide() {
-     navigate("/", { replace: true });
+  function back() {
+    navigate("/", { replace: true });
   }
 
-  function add() {
+  function isEditMode() {
+    return id !== undefined
+  }
+
+  function save() {
     let startTime = moment(dateValue, "DD.MM.YYYY", "de", true);
     let endTime = moment(dateValue, "DD.MM.YYYY", "de", true);
 
@@ -55,11 +62,28 @@
       description: description
     };
 
-    addActivity(activity);
-    hide();
+    if (isEditMode()) {
+      activity.id = id;
+      updateActivity(activity);
+    } else {
+      addActivity(activity);
+    }
+    back();
   }
 
-  function reset() {
+  function init() {
+    if (id !== undefined) {
+      let activity = getActivity(id);
+      if (activity !== undefined) {
+        selectedProject = getProject(activity.project.id);
+        description = activity.description;
+        dateValue = activity.startTime.startOf("minute").format("DD.MM.YYYY");
+        timeFromValue = activity.startTime.format("HH:mm");
+        timeToValue = activity.endTime.format("HH:mm");
+        return;
+      }
+    }
+
     selectedProject = $projectStore[0];
     description = null;
     dateValue = moment()
@@ -70,17 +94,20 @@
   }
 
   function cancel() {
-    hide();
+    back();
   }
 
-  reset();
+  init();
 </script>
 
 <style>
 
 </style>
 
-<h1 class="title">Add Activity</h1>
+<h1 class="title">
+  {#if isEditMode()}Update{:else}Add{/if}
+  Activity
+</h1>
 
 <div class="field is-horizontal">
   <div class="field-label is-normal">
@@ -181,8 +208,8 @@
     <button
       class="button is-success"
       disabled={!(isValidDateValue && isValidTimeFrom && isValidTimeTo)}
-      on:click={add}>
-      Add
+      on:click={save}>
+      {#if isEditMode()}Update{:else}Add{/if}
     </button>
     <button class="button" on:click={cancel}>Cancel</button>
 

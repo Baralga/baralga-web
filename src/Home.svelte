@@ -5,7 +5,7 @@
   import { formatDuration } from "./formatter.js";
   import Projects from "./Projects.svelte";
   import Report from "./Report.svelte";
-  import AddActivity from "./AddActivity.svelte";
+  import Activity from "./Activity.svelte";
   import ExportAsCsv from "./ExportAsCsv.svelte";
   import Home from "./Home.svelte";
 
