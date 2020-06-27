@@ -5,8 +5,8 @@
   import { formatDuration } from "./formatter.js";
   import Projects from "./Projects.svelte";
   import Report from "./Report.svelte";
-  import Activity from "./Activity.svelte";
-  import ExportAsCsv from "./ExportAsCsv.svelte";
+  import Activities from "./Activities.svelte";
+  import ExportActivitiesAsCsv from "./ExportActivitiesAsCsv.svelte";
   import Home from "./Home.svelte";
 
   let runningActivity = false;
@@ -100,7 +100,7 @@
 
       </Router>
 
-      <ExportAsCsv />
+      <ExportActivitiesAsCsv />
     </div>
   </div>
 

@@ -1,5 +1,5 @@
 <script>
-  import { Router, Link, Route } from "svelte-routing";
+  import { Router, Route } from "svelte-routing";
   import EditActivity from "./EditActivity.svelte";
 </script>
 
@@ -10,7 +10,7 @@
   <Route path="/new">
     <EditActivity />
   </Route>
-  <Route path=":id/edit" let:params>
+  <Route path="/:id/edit" let:params>
     <EditActivity id={params.id} />
   </Route>
 </Router>
