@@ -1,5 +1,6 @@
 import moment from 'moment/src/moment';
 import { writable, get } from 'svelte/store';
+import shortid from './shortid';
 
 const createWritableStore = (key, startValue, elementInitializer) => {
     const { subscribe, set } = writable(startValue);
