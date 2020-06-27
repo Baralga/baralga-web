@@ -1,6 +1,5 @@
 import moment from 'moment/src/moment';
 import { writable, get } from 'svelte/store';
-import shortid from 'shortid/index';
 
 const createWritableStore = (key, startValue, elementInitializer) => {
     const { subscribe, set } = writable(startValue);
@@ -42,7 +41,7 @@ const createWritableStore = (key, startValue, elementInitializer) => {
 
 let projects = [
     {
-        id: shortid.generate(),
+        id: shortid(),
         name: 'My Project'
     }
 ];
@@ -52,7 +51,7 @@ projectStore.useLocalStorage();
 
 const activityInitializer = (activity) => {
     if (!activity.id) {
-        activity.id = shortid.generate();
+        activity.id = shortid();
     }
     activity.startTime = moment(activity.startTime);
     activity.endTime = moment(activity.endTime);
@@ -72,7 +71,7 @@ export const deleteProject = (project) => {
 
 export const addActivity = (activity) => {
     if (!activity.id) {
-        activity.id = shortid.generate();
+        activity.id = shortid();
     }
     let activities = [...get(activitiesStore), activity];
     activitiesStore.set(activities);
@@ -129,7 +128,7 @@ activitiesStore.subscribe(() => {
 
 export const addProject = (project) => {
     if (!project.id) {
-        project.id = shortid.generate();
+        project.id = shortid();
     }
 
     let projects = [...get(projectStore), project];
