@@ -7,10 +7,10 @@
 </style>
 
 <Router>
-  <Route>
+  <Route path="/new">
     <EditActivity />
   </Route>
-  <Route path=":id" let:params>
+  <Route path=":id/edit" let:params>
     <EditActivity id={params.id} />
   </Route>
 </Router>

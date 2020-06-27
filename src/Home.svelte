@@ -55,11 +55,30 @@
 
   <div class="column is-12">
     <div class="buttons">
-      <Projects />
-
       <Router>
         <a
-          href="/activity"
+          href="/projects"
+          use:link
+          replace
+          class="button is-link is-hidden-mobile">
+          <span class="icon">
+            <i class="fas fa-edit" />
+          </span>
+          <span>Manage Projects</span>
+        </a>
+
+        <a
+          href="/projects"
+          use:link
+          replace
+          class="button is-link is-hidden-desktop">
+          <span class="icon">
+            <i class="fas fa-edit" />
+          </span>
+        </a>
+
+        <a
+          href="/activities/new"
           use:link
           replace
           class="button is-link is-hidden-mobile">
@@ -70,7 +89,7 @@
         </a>
 
         <a
-          href="/activity"
+          href="/activities/new"
           use:link
           replace
           class="button is-link is-hidden-desktop">
