@@ -1,8 +1,15 @@
 <script>
-  import { navigate } from "svelte-routing";
-  import { projectStore, deleteProject, addProject } from "./stores.js";
+  import { navigate, Router, Link, Route } from "svelte-routing";
+  import { projectStore, addProject } from "./stores.js";
+  import DeleteProject from "./DeleteProject.svelte";
 
   let name = "";
+
+  $: isValidName = validateName(name);
+
+  function validateName(name) {
+    return name && name.length >= 3;
+  }
 
   function back() {
     navigate("/", { replace: true });
@@ -17,54 +24,75 @@
 
     name = "";
   }
-
-  function cancel() {
-    back();
-  }
 </script>
 
 <style>
 
 </style>
 
-<h1 class="title">Manage Projects</h1>
+<Router>
+  <Route path=":id/delete" let:params>
+    <DeleteProject id={params.id} />
+  </Route>
+  <Route>
 
-<div class="field">
-  <label class="label">Name</label>
-  <div class="field-body">
+    <h1 class="title">Projects</h1>
+
     <div class="field">
-      <p class="control">
-        <input class="input" type="text" bind:value={name} />
-      </p>
-    </div>
-    <div class="field">
-      <div class="control">
-        <span class="button is-success" on:click={add}>
-          <span class="icon is-medium">
-            <i class="fa fa-plus" />
-          </span>
-        </span>
+      <label class="label">Name</label>
+      <div class="field-body">
+        <div class="field">
+          <p class="control">
+            <input
+              class="input"
+              minlength="3"
+              maxlength="200"
+              type="text"
+              bind:value={name} />
+          </p>
+        </div>
+        <div class="field">
+          <div class="control">
+            <button
+              class="button is-success"
+              disabled={!isValidName}
+              on:click={add}>
+              <span class="icon is-medium">
+                <i class="fa fa-plus" />
+              </span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<nav class="panel">
-  {#each $projectStore as project}
-    <div class="panel-block">
-      <span
-        class="panel-icon"
-        title="Delete {project.name}"
-        on:click={() => deleteProject(project)}>
-        <i class="fas fa-trash" aria-hidden="true" />
-      </span>
-      {project.name}
+    <div class="columns is-multiline">
+
+      {#each $projectStore as project}
+        <div class=" column is-12">
+          <div class="card" title={project.name}>
+            <header class="card-header">
+              <p class="card-header-title">{project.name}</p>
+
+              <a href="/projects/{project.id}/delete" class="card-header-icon">
+                <span class="icon">
+                  <i class="fas fa-trash" aria-hidden="true" />
+                </span>
+              </a>
+            </header>
+
+          </div>
+        </div>
+      {/each}
+
+      <div class=" column is-12">
+        <div class="field is-grouped">
+          <p class="control">
+            <button class="button" on:click={back}>Back</button>
+          </p>
+        </div>
+      </div>
+
     </div>
-  {/each}
-</nav>
-
-<div class="field is-grouped">
-  <p class="control">
-    <button class="button" on:click={cancel}>Cancel</button>
-  </p>
-</div>
+  </Route>
+</Router>

@@ -62,6 +62,15 @@ const activityInitializer = (activity) => {
 export const activitiesStore = createWritableStore('activities', [], activityInitializer);
 activitiesStore.useLocalStorage();
 
+export const deleteProjectValidate = (project) => {
+    let dependingActivities = [...get(activitiesStore)].filter((activity) => activity.project.id === project.id);
+    return {
+        project: project,
+        dependingActivities: dependingActivities,
+        dependingActivitiesCount: dependingActivities.length,
+    };
+}
+
 export const deleteProject = (project) => {
     let projects = [...get(projectStore)].filter((p) => p.id !== project.id);
     projectStore.set(projects);

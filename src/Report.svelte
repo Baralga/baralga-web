@@ -165,7 +165,7 @@
             <p class="card-header-title">
               {activity.startTime.format('DD.MM.YYYY')}
             </p>
-            <a href="/activities/{activity.id}/edit" class="card-header-icon" aria-label="more options">
+            <a href="/activities/{activity.id}/edit" class="card-header-icon">
               <span class="icon">
                 <i class="fas fa-edit" aria-hidden="true"></i>
               </span>
