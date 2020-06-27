@@ -1,15 +1,11 @@
 <script>
+  import { navigate } from "svelte-routing";
   import { projectStore, deleteProject, addProject } from "./stores.js";
 
   let name = "";
-  let projectModalVisible = false;
 
-  function show() {
-    projectModalVisible = true;
-  }
-
-  function hide() {
-    projectModalVisible = false;
+  function back() {
+    navigate("/", { replace: true });
   }
 
   function add() {
@@ -23,7 +19,7 @@
   }
 
   function cancel() {
-    hide();
+    back();
   }
 </script>
 
@@ -31,64 +27,44 @@
 
 </style>
 
-<button class="button is-link is-hidden-mobile" on:click={show}>
-  <span class="icon">
-    <i class="fas fa-edit" />
-  </span>
-  <span>Manage Project</span>
-</button>
+<h1 class="title">Manage Projects</h1>
 
-<button class="button is-link is-hidden-desktop" on:click={show}>
-  <span class="icon">
-    <i class="fas fa-edit" />
-  </span>
-</button>
-
-<div class="{projectModalVisible === true ? 'is-active' : ''} modal is-clipped">
-  <div class="modal-background" />
-
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">Manage Projects</p>
-      <button class="delete" aria-label="close" on:click={cancel} />
-    </header>
-    <section class="modal-card-body">
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Name</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <p class="control">
-              <input class="input" type="text" bind:value={name} />
-            </p>
-          </div>
-          <div class="field">
-            <p class="control">
-              <span class="button" on:click={add}>
-                <span class="icon is-medium">
-                  <i class="fa fa-plus" />
-                </span>
-              </span>
-            </p>
-          </div>
-        </div>
+<div class="field">
+  <label class="label">Name</label>
+  <div class="field-body">
+    <div class="field">
+      <p class="control">
+        <input class="input" type="text" bind:value={name} />
+      </p>
+    </div>
+    <div class="field">
+      <div class="control">
+        <span class="button is-success" on:click={add}>
+          <span class="icon is-medium">
+            <i class="fa fa-plus" />
+          </span>
+        </span>
       </div>
-
-      <nav class="panel">
-        {#each $projectStore as project}
-          <div class="panel-block">
-            <span class="panel-icon" title="Delete {project.name}" on:click={() => deleteProject(project)}>
-              <i class="fas fa-trash" aria-hidden="true" />
-            </span>
-            {project.name}
-          </div>
-        {/each}
-      </nav>
-
-    </section>
+    </div>
   </div>
+</div>
 
-  <button class="modal-close is-large" aria-label="close" />
+<nav class="panel">
+  {#each $projectStore as project}
+    <div class="panel-block">
+      <span
+        class="panel-icon"
+        title="Delete {project.name}"
+        on:click={() => deleteProject(project)}>
+        <i class="fas fa-trash" aria-hidden="true" />
+      </span>
+      {project.name}
+    </div>
+  {/each}
+</nav>
+
+<div class="field is-grouped">
+  <p class="control">
+    <button class="button" on:click={cancel}>Cancel</button>
+  </p>
 </div>
