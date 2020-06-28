@@ -38,35 +38,35 @@
 
     <h1 class="title">Projects</h1>
 
-    <div class="field">
-      <label class="label">Name</label>
-      <div class="field-body">
+    <div class="columns is-multiline">
+      <div class=" column is-12">
+
         <div class="field">
-          <p class="control">
-            <input
-              class="input"
-              minlength="3"
-              maxlength="200"
-              type="text"
-              bind:value={name} />
-          </p>
-        </div>
-        <div class="field">
-          <div class="control">
-            <button
-              class="button is-success"
-              disabled={!isValidName}
-              on:click={add}>
-              <span class="icon is-medium">
-                <i class="fa fa-plus" />
-              </span>
-            </button>
+          <label class="label">Name</label>
+
+          <div class="field has-addons">
+            <div class="control">
+              <input
+                class="input"
+                minlength="3"
+                maxlength="200"
+                type="text"
+                bind:value={name} />
+            </div>
+            <div class="control">
+              <button
+                class="button is-success"
+                disabled={!isValidName}
+                on:click={add}>
+                <span class="icon is-medium">
+                  <i class="fa fa-plus" />
+                </span>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="columns is-multiline">
+      </div>
 
       {#each $projectStore as project}
         <div class=" column is-12">
