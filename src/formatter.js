@@ -5,27 +5,27 @@ export const formatDuration = (duration) => {
     duration
       .hours()
       .toString()
-      .padStart(2, "0") +
+      .padStart(2, '0') +
     ":" +
     duration
       .minutes()
       .toString()
-      .padStart(2, "0")
+      .padStart(2, '0')
   );
 };
 
 export const asFilterLabel = (filter) => {
   switch (filter.timespan) {
-      case "year":
-          return filter.from.format("YYYY");
-      case "quarter":
-          return filter.from.format("Qo") + " Quarter";
-      case "month":
-          return filter.from.format("YYYY MMMM");
-      case "week":
-          return filter.from.format("wo") + " Week";
+      case 'year':
+          return filter.from.format('YYYY');
+      case 'quarter':
+          return filter.from.format('Qo') + ' Quarter ' + filter.from.format('YYYY');
+      case 'month':
+          return filter.from.format('MMMM YYYY');
+      case 'week':
+          return filter.from.format('wo') + ' Week ' + filter.from.format('MMMM YYYY');
       default:
-          return "?";
+          return '?';
   }
 }
 
