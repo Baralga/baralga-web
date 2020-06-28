@@ -1,36 +1,11 @@
 <script>
   import FileSaver from "file-saver/src/FileSaver";
   import { filteredActivitiesStore, filterStore } from "./stores.js";
-  import { asFilterLabel, asFormattedDuration } from "./formatter.js";
-
-  const CSV_HEADER = [
-    "Date",
-    "Start",
-    "End",
-    "Duration",
-    "Project",
-    "Description"
-  ]
-    .join(";")
-    .concat("\n");
+  import { asFilterLabel } from "./formatter.js";
+  import { createCsv } from "./export_csv.js";
 
   function exportCsv() {
-    let activities = $filteredActivitiesStore.map(activity => {
-      return [
-        activity.startTime.format("DD.MM.YYYY"),
-        activity.startTime.format("HH:mm"),
-        activity.endTime.format("HH:mm"),
-        asFormattedDuration(activity.startTime, activity.endTime),
-        activity.project.name,
-        activity.description
-      ]
-        .join(";")
-        .concat("\n");
-    });
-
-    let blob = new Blob([CSV_HEADER, ...activities], {
-      type: "text/csv;charset=utf-8"
-    });
+    let blob = createCsv($filteredActivitiesStore);
     FileSaver.saveAs(
       blob,
       "Activities-" + asFilterLabel($filterStore) + ".csv"
