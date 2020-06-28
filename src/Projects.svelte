@@ -35,7 +35,6 @@
     <DeleteProject id={params.id} />
   </Route>
   <Route>
-
     <h1 class="title">Projects</h1>
 
     <div class="columns is-multiline">

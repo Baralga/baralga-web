@@ -160,14 +160,14 @@
   {#if $filteredActivitiesStore.length > 0}
     {#each $filteredActivitiesStore as activity}
       <div class="column is-12">
-        <div class="card" title="{activity.description}">
+        <div class="card" title={activity.description}>
           <header class="card-header">
             <p class="card-header-title">
               {activity.startTime.format('DD.MM.YYYY')}
             </p>
             <a href="/activities/{activity.id}/edit" class="card-header-icon">
               <span class="icon">
-                <i class="fas fa-edit" aria-hidden="true"></i>
+                <i class="fas fa-edit" aria-hidden="true" />
               </span>
             </a>
           </header>
