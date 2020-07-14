@@ -1,55 +1,69 @@
 import moment from "moment/src/moment";
 
 export const readXml = (xmlBackupContents) => {
-  let parser = new DOMParser();
-  let xmlDoc = parser.parseFromString(xmlBackupContents, "text/xml");
+  try {
+    let parser = new DOMParser();
+    let xmlDoc = parser.parseFromString(xmlBackupContents, "text/xml");
 
-  let projects = [];
-  let projectElements = xmlDoc.getElementsByTagName("project");
-  for (let i = 0; i < projectElements.length; i++) {
-    let projectElement = projectElements[i];
+    let errElemCount = xmlDoc.getElementsByTagName("parsererror").length;
+    if (errElemCount > 0) {
+      throw xmlDoc.getElementsByTagName("parsererror");
+    }
 
-    let project = {
-      id: projectElement.attributes.id.nodeValue,
-      name: projectElement.getElementsByTagName("title")[0].innerHTML,
-      description: projectElement.getElementsByTagName("description")[0]
-        .innerHTML,
+    let projects = [];
+    let projectElements = xmlDoc.getElementsByTagName("project");
+    for (let i = 0; i < projectElements.length; i++) {
+      let projectElement = projectElements[i];
+
+      let project = {
+        id: projectElement.attributes.id.nodeValue,
+        name: projectElement.getElementsByTagName("title")[0].innerHTML,
+        description: projectElement.getElementsByTagName("description")[0]
+          .innerHTML,
+      };
+
+      projects.push(project);
+    }
+
+    let activities = [];
+    let activityElements = xmlDoc.getElementsByTagName("activity");
+    for (let i = 0; i < activityElements.length; i++) {
+      let activityElement = activityElements[i];
+
+      let startTime = moment(
+        activityElement.attributes.start.nodeValue,
+        "yyyy-MM-DDTHH:mm"
+      );
+      let endTime = moment(
+        activityElement.attributes.end.nodeValue,
+        "yyyy-MM-DDTHH:mm"
+      );
+
+      let projectId = activityElement.attributes.projectReference.nodeValue;
+      let project = projects.find((project) => project.id == projectId);
+
+      let activity = {
+        id: activityElement.attributes.id.nodeValue,
+        startTime: startTime,
+        endTime: endTime,
+        project: project,
+      };
+
+      activities.push(activity);
+    }
+
+    return {
+      status: "ok",
+      activities: activities,
+      projects: projects,
     };
-
-    projects.push(project);
-  }
-
-  let activities = [];
-  let activityElements = xmlDoc.getElementsByTagName("activity");
-  for (let i = 0; i < activityElements.length; i++) {
-    let activityElement = activityElements[i];
-
-    let startTime = moment(
-      activityElement.attributes.start.nodeValue,
-      "yyyy-MM-DDTHH:mm"
-    );
-    let endTime = moment(
-      activityElement.attributes.end.nodeValue,
-      "yyyy-MM-DDTHH:mm"
-    );
-
-    let projectId = activityElement.attributes.projectReference.nodeValue;
-    let project = projects.find((project) => project.id == projectId);
-
-    let activity = {
-      id: activityElement.attributes.id.nodeValue,
-      startTime: startTime,
-      endTime: endTime,
-      project: project,
+  } catch (e) {
+    return {
+      status: "error",
+      activities: [],
+      projects: [],
     };
-
-    activities.push(activity);
   }
-
-  return {
-    activities: activities,
-    projects: projects,
-  };
 };
 
 export const createXml = (activities, projects) => {
