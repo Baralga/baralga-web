@@ -118,6 +118,11 @@ const filterInitializer = (filter) => {
   return filter;
 };
 
+export const importBackup = (dataBackup) => {
+  projectStore.set(dataBackup.projects);
+  activitiesStore.set(dataBackup.activities);
+}
+
 export const filteredActivitiesStore = createWritableStore(
   "filteredActivities",
   []

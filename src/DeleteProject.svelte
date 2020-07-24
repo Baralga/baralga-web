@@ -36,7 +36,7 @@
 
 </style>
 
-<h1 class="title">Delete Project {project.name}</h1>
+<h1 class="title is-1">Delete Project {project.name}</h1>
 
 <div class="columns is-multiline">
 

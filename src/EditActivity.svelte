@@ -109,7 +109,7 @@
 
 </style>
 
-<h1 class="title">
+<h1 class="title is-1">
   {#if isEditMode()}Edit{:else}Add{/if}
   Activity
 </h1>
