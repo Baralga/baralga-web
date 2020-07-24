@@ -1,6 +1,7 @@
 <script>
   import FileSaver from "file-saver/src/FileSaver";
-  import { activitiesStore, projectStore } from "./stores.js";
+  import { navigate } from "svelte-routing";
+  import { activitiesStore, projectStore, importBackup } from "./stores.js";
   import { readXml, createXml } from "./xml_backup.js";
   import moment from "moment/src/moment";
 
@@ -36,7 +37,9 @@
   }
 
   function doImport() {
+    importBackup(backup);
     backup = null;
+    navigate("/", { replace: true });
   }
 
   let isFileApiSupported =
@@ -122,7 +125,6 @@
                 Yes, import and overwrite all my data
               </button>
               <button class="button" on:click={cancel}>Cancel</button>
-
             </p>
           </div>
         {:else}
