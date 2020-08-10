@@ -3,7 +3,7 @@ import {
   asFormattedDuration,
   asFilterLabel,
 } from "./formatter.js";
-import moment from "moment/src/moment";
+import moment = require('moment');
 import assert from "assert";
 
 describe("Formatter Tests", () => {

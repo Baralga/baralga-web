@@ -6,7 +6,7 @@
     addActivity,
     updateActivity,
     getActivity
-  } from "./stores.js";
+  } from "./stores";
   import { navigate } from "svelte-routing";
   import EditActivity from "./EditActivity.svelte";
 

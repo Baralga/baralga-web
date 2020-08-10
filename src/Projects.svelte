@@ -1,6 +1,6 @@
 <script>
   import { navigate, Router, Link, Route } from "svelte-routing";
-  import { projectStore, addProject } from "./stores.js";
+  import { projectStore, addProject } from "./stores";
   import DeleteProject from "./DeleteProject.svelte";
 
   let name = "";

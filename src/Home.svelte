@@ -1,8 +1,8 @@
 <script>
   import { Router, Link, link, Route } from "svelte-routing";
   import moment from "moment/src/moment";
-  import { projectStore, addActivity } from "./stores.js";
-  import { formatDuration } from "./formatter.js";
+  import { projectStore, addActivity } from "./stores";
+  import { formatDuration } from "./formatter";
   import Projects from "./Projects.svelte";
   import Report from "./Report.svelte";
   import Activities from "./Activities.svelte";

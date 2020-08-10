@@ -1,8 +1,8 @@
 <script>
   import FileSaver from "file-saver/src/FileSaver";
-  import { filteredActivitiesStore, filterStore } from "./stores.js";
-  import { asFilterLabel } from "./formatter.js";
-  import { createCsv } from "./export_csv.js";
+  import { filteredActivitiesStore, filterStore } from "./stores";
+  import { asFilterLabel } from "./formatter";
+  import { createCsv } from "./export_csv";
 
   function exportCsv() {
     let blob = createCsv($filteredActivitiesStore);

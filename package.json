@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "parcel src/index.html",
     "build": "parcel build --no-source-maps src/index.html src/manifest.webmanifest",
-    "test": "mocha \"./{,!(node_modules)/**/}*.spec.js\" --require esm"
+    "test": "mocha -r ts-node/register src/**/*.spec.ts"
   },
   "browserslist": [
     "last 1 chrome versions"
@@ -21,6 +21,8 @@
   ],
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
+    "@tsconfig/svelte": "^1.0.8",
+    "@types/mocha": "^8.0.1",
     "bulma": "^0.9.0",
     "esm": "^3.2.25",
     "mocha": "^8.0.1",
@@ -28,7 +30,11 @@
     "parcel-plugin-svelte": "^4.0.6",
     "sass": "^1.26.10",
     "svelte": "^3.24.0",
-    "svelte-routing": "^1.4.2"
+    "svelte-check": "^1.0.11",
+    "svelte-preprocess": "^4.0.10",
+    "svelte-routing": "^1.4.2",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
   },
   "dependencies": {
     "file-saver": "^2.0.2",

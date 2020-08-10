@@ -5,12 +5,12 @@
     filteredActivitiesStore,
     totalDurationStore,
     applyFilter
-  } from "./stores.js";
+  } from "./stores";
   import {
     formatDuration,
     asFormattedDuration,
     asFilterLabel
-  } from "./formatter.js";
+  } from "./formatter";
 
   let selectedTimespan = "year";
   let filterLabel = "";

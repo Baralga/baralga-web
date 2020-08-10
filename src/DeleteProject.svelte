@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
   import {
     getProject,
     deleteProject,
     deleteProjectValidate
-  } from "./stores.js";
+  } from "./stores";
   import { navigate } from "svelte-routing";
 
   export let id = undefined;
