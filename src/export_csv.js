@@ -1,4 +1,4 @@
-import { asFormattedDuration } from "./formatter.js";
+import { asFormattedDuration } from "./formatter";
 
 const CSV_HEADER = [
   "Date",
