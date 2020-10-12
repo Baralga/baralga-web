@@ -2,20 +2,20 @@ import {
   formatDuration,
   asFormattedDuration,
   asFilterLabel,
-} from "./formatter.js";
-import moment = require('moment');
-import assert from "assert";
+} from "./formatter";
+import * as moment from 'moment/moment.js';
+import { expect } from 'chai';
 
 describe("Formatter Tests", () => {
   describe("Format Duration", () => {
     it("should format the duration with hours", () => {
       let duration = moment.duration(2, "hours");
-      assert.equal(formatDuration(duration), "02:00");
+      expect(formatDuration(duration)).to.equal("02:00");
     });
 
     it("should format the duration with minutes", () => {
       let duration = moment.duration(30, "minutes");
-      assert.equal(formatDuration(duration), "00:30");
+      expect(formatDuration(duration)).to.equal("00:30");
     });
   });
 
@@ -25,7 +25,7 @@ describe("Formatter Tests", () => {
         timespan: "year",
         from: moment("2020-11-01"),
       };
-      assert.equal(asFilterLabel(filter), "2020");
+      expect(asFilterLabel(filter)).to.equal("2020");
     });
 
     it("should format the filter label for quarter", () => {
@@ -33,7 +33,7 @@ describe("Formatter Tests", () => {
         timespan: "quarter",
         from: moment("2020-11-01"),
       };
-      assert.equal(asFilterLabel(filter), "4th Quarter 2020");
+      expect(asFilterLabel(filter)).to.equal("4th Quarter 2020");
     });
 
     it("should format the filter label for month", () => {
@@ -41,7 +41,7 @@ describe("Formatter Tests", () => {
         timespan: "month",
         from: moment("2020-11-01"),
       };
-      assert.equal(asFilterLabel(filter), "November 2020");
+      expect(asFilterLabel(filter)).to.equal("November 2020");
     });
 
     it("should format the filter label for week", () => {
@@ -49,7 +49,7 @@ describe("Formatter Tests", () => {
         timespan: "week",
         from: moment("2020-11-01"),
       };
-      assert.equal(asFilterLabel(filter), "45th Week November 2020");
+      expect(asFilterLabel(filter)).to.equal("45th Week November 2020");
     });
   });
 });

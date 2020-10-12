@@ -1,4 +1,4 @@
-import moment from "moment/src/moment";
+import * as moment from 'moment/moment.js';
 
 export const formatDuration = (duration) => {
   return (
