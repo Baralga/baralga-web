@@ -1,10 +1,11 @@
-import moment from "moment/src/moment";
+import * as moment from 'moment/moment.js';
 import { writable, get } from "svelte/store";
 import shortid from "./shortid";
 
-class Project {
+export class Project {
   id: string;
   name: string;
+  description: string;
 
   constructor(id: string, name: string) {
     this.id = id;

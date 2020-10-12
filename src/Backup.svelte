@@ -2,7 +2,7 @@
   import FileSaver from "file-saver/src/FileSaver";
   import { navigate } from "svelte-routing";
   import { activitiesStore, projectStore, importBackup } from "./stores";
-  import { readXml, createXml } from "./xml_backup.js";
+  import { readXml, createXml } from "./xml_backup";
   import moment from "moment/src/moment";
 
   let backup;
