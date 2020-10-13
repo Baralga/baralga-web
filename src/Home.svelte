@@ -71,7 +71,7 @@
           href="/projects"
           use:link
           replace
-          class="button is-link is-hidden-desktop">
+          class="button is-link is-hidden-desktop is-hidden-tablet">
           <span class="icon">
             <i class="fas fa-edit" />
           </span>
@@ -92,7 +92,7 @@
           href="/activities/new"
           use:link
           replace
-          class="button is-link is-hidden-desktop">
+          class="button is-link is-hidden-desktop is-hidden-tablet">
           <span class="icon">
             <i class="fas fa-plus" />
           </span>

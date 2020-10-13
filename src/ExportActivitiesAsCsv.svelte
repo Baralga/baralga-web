@@ -23,7 +23,7 @@
   </span>
 </button>
 
-<button class="button is-link is-hidden-desktop" on:click={exportCsv}>
+<button class="button is-link is-hidden-desktop is-hidden-tablet" on:click={exportCsv}>
   <span class="icon">
     <i class="fas fa-file-csv" />
   </span>

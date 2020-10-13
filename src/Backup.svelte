@@ -69,7 +69,7 @@
             </button>
 
             <button
-              class="button is-link is-hidden-desktop"
+              class="button is-link is-hidden-desktop is-hidden-tablet"
               on:click={exportXml}>
               <span class="icon">
                 <i class="fas fa-file-code" />
