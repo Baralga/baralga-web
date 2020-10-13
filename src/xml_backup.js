@@ -95,10 +95,11 @@ export const createXml = (activities, projects) => {
     projectElement.appendChild(titleElement);
 
     let descriptionElement = xmlDoc.createElement("description");
-  //  if (project.description) {
-      let descriptionText = xmlDoc.createTextNode(project.description ? project.description : "");
+    console.error(project.description);
+    if (project.description) {
+      let descriptionText = xmlDoc.createTextNode(project.description);
       descriptionElement.appendChild(descriptionText);
-//    }
+    }
     projectElement.appendChild(descriptionElement);
   });
 
