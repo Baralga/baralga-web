@@ -95,7 +95,7 @@ export const createXml = (activities, projects) => {
     projectElement.appendChild(titleElement);
 
     let descriptionElement = xmlDoc.createElement("description");
-    if (project.description) {
+    if (project && project.description) {
       let descriptionText = xmlDoc.createTextNode(project.description);
       descriptionElement.appendChild(descriptionText);
     }
