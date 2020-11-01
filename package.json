@@ -23,11 +23,11 @@
     "@fortawesome/fontawesome-free": "^5.15.1",
     "bulma": "^0.9.1",
     "esm": "^3.2.25",
-    "mocha": "^8.1.3",
+    "mocha": "^8.2.0",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-svelte": "^4.0.6",
-    "sass": "^1.27.0",
-    "svelte": "^3.29.0",
+    "sass": "^1.28.0",
+    "svelte": "^3.29.4",
     "svelte-routing": "^1.4.2"
   },
   "dependencies": {
