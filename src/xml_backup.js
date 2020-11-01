@@ -98,6 +98,12 @@ export const createXml = (activities, projects) => {
     projectElement.appendChild(descriptionElement);
 
     console.error("BAM : " + project.description);
+    if (!project.description) {
+      console.error("NO DESC");
+      return;
+    }
+    console.error("WITH DESC");
+
     let descriptionText = xmlDoc.createTextNode(project.description);
     descriptionElement.appendChild(descriptionText);
   });
