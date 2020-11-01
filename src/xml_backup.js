@@ -98,10 +98,8 @@ export const createXml = (activities, projects) => {
     projectElement.appendChild(descriptionElement);
 
     console.error(project.description);
-    if (project.description) {
-      let descriptionText = xmlDoc.createTextNode(project.description);
-      descriptionElement.appendChild(descriptionText);
-    }
+    let descriptionText = xmlDoc.createTextNode(project.description);
+    descriptionElement.appendChild(descriptionText);
   });
 
   let activitiesElement = xmlDoc.createElement("activities");
