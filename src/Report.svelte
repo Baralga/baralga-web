@@ -114,7 +114,7 @@
         <div class="level-item report-filter">
 
           <div class="select">
-            <select bind:value={selectedTimespan} on:change={resetTimespan}>
+            <select bind:value={selectedTimespan} on:blur={resetTimespan}>
               <option value="week">Week</option>
               <option value="month">Month</option>
               <option value="quarter">Quarter</option>
