@@ -97,7 +97,7 @@ export const createXml = (activities, projects) => {
     let descriptionElement = xmlDoc.createElement("description");
     projectElement.appendChild(descriptionElement);
 
-    console.error(project.description);
+    console.error("BAM : " + project.description);
     let descriptionText = xmlDoc.createTextNode(project.description);
     descriptionElement.appendChild(descriptionText);
   });
