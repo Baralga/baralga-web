@@ -97,15 +97,10 @@ export const createXml = (activities, projects) => {
     let descriptionElement = xmlDoc.createElement("description");
     projectElement.appendChild(descriptionElement);
 
-    console.error("BAM : " + project.description);
-    if (!project.description) {
-      console.error("NO DESC");
-      return;
+    if (project.description) {
+      let descriptionText = xmlDoc.createTextNode(project.description);
+      descriptionElement.appendChild(descriptionText);
     }
-    console.error("WITH DESC");
-
-    let descriptionText = xmlDoc.createTextNode(project.description);
-    descriptionElement.appendChild(descriptionText);
   });
 
   let activitiesElement = xmlDoc.createElement("activities");
@@ -133,7 +128,7 @@ export const createXml = (activities, projects) => {
 
     let descriptionElement = xmlDoc.createElement("description");
     if (activity.description) {
-      let descriptionText = xmlDoc.createTextNode(project.description);
+      let descriptionText = xmlDoc.createTextNode(activity.description);
       descriptionElement.appendChild(descriptionText);
     }
     activityElement.appendChild(descriptionElement);
