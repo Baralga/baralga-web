@@ -174,7 +174,7 @@
           <div class="card-content">
             <div class="content">
               <div class="columns is-mobile">
-                <div class="column is-4">{activity.project.name}</div>
+                <div class="column is-4">{activity.project.title}</div>
                 <div class="column is-5">
                   {activity.startTime.format('HH:mm')} - {activity.endTime.format('HH:mm')}
                 </div>

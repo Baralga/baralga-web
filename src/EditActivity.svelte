@@ -5,7 +5,8 @@
     getProject,
     addActivity,
     updateActivity,
-    getActivity
+    getActivity,
+    reloadProjects
   } from "./stores.js";
   import { navigate } from "svelte-routing";
   import EditActivity from "./EditActivity.svelte";
@@ -77,18 +78,6 @@
   }
 
   function init() {
-    if (id !== undefined) {
-      let activity = getActivity(id);
-      if (activity !== undefined) {
-        selectedProject = getProject(activity.project.id);
-        description = activity.description;
-        dateValue = activity.startTime.startOf("minute").format("DD.MM.YYYY");
-        timeFromValue = activity.startTime.format("HH:mm");
-        timeToValue = activity.endTime.format("HH:mm");
-        return;
-      }
-    }
-
     selectedProject = $projectStore[0];
     description = null;
     dateValue = moment()
@@ -96,12 +85,34 @@
       .format("DD.MM.YYYY");
     timeFromValue = moment().format("HH:mm");
     timeToValue = moment().format("HH:mm");
+
+    if (id !== undefined) {
+      let activity = getActivity(id)
+        .then(activity => {
+          let startTime = moment(activity.start);
+          let endTime = moment(activity.end);
+
+          let projectId = activity._links.project.href.substring(
+            activity._links.project.href.lastIndexOf("/") + 1
+          );
+          selectedProject = getProject(projectId);
+          description = activity.description;
+          dateValue = startTime.startOf("minute").format("DD.MM.YYYY");
+          timeFromValue = startTime.format("HH:mm");
+          timeToValue = endTime.format("HH:mm");
+          return;
+        })
+        .catch(error => {
+          cancel();
+        });
+    }
   }
 
   function cancel() {
     back();
   }
 
+  reloadProjects();
   init();
 </script>
 
@@ -119,7 +130,7 @@
   <div class="control select">
     <select bind:value={selectedProject}>
       {#each $projectStore as project}
-        <option value={project}>{project.name}</option>
+        <option value={project}>{project.title}</option>
       {/each}
     </select>
   </div>

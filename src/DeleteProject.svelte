@@ -13,7 +13,6 @@
   function init() {
     project = getProject(id);
     validation = deleteProjectValidate(project);
-    console.error(validation);
   }
 
   function back() {

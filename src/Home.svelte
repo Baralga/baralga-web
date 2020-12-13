@@ -1,7 +1,7 @@
 <script>
   import { Router, Link, link, Route } from "svelte-routing";
   import moment from "moment/src/moment";
-  import { projectStore, addActivity } from "./stores.js";
+  import { projectStore, addActivity, reloadProjects } from "./stores.js";
   import { formatDuration } from "./formatter.js";
   import Projects from "./Projects.svelte";
   import Report from "./Report.svelte";
@@ -49,6 +49,8 @@
     activeProject = selectedProject;
     updateTimer();
   }
+
+  reloadProjects();
 </script>
 
 <div class="columns is-multiline">
@@ -125,7 +127,7 @@
           <fieldset disabled={runningActivity}>
             <select bind:value={selectedProject}>
               {#each $projectStore as project}
-                <option value={project}>{project.name}</option>
+                <option value={project}>{project.title}</option>
               {/each}
             </select>
           </fieldset>

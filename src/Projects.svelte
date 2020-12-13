@@ -3,12 +3,12 @@
   import { projectStore, addProject } from "./stores.js";
   import DeleteProject from "./DeleteProject.svelte";
 
-  let name = "";
+  let title = "";
 
-  $: isValidName = validateName(name);
+  $: isValidTitle = validateTitle(title);
 
-  function validateName(name) {
-    return name && name.length >= 3;
+  function validateTitle(title) {
+    return title && title.length >= 3;
   }
 
   function back() {
@@ -17,12 +17,13 @@
 
   function add() {
     let project = {
-      name: name
+      title: title,
+      active: true,
     };
 
     addProject(project);
 
-    name = "";
+    title = "";
   }
 </script>
 
@@ -50,12 +51,12 @@
                 minlength="3"
                 maxlength="200"
                 type="text"
-                bind:value={name} />
+                bind:value={title} />
             </div>
             <div class="control">
               <button
                 class="button is-success"
-                disabled={!isValidName}
+                disabled={!isValidTitle}
                 on:click={add}>
                 <span class="icon is-medium">
                   <i class="fa fa-plus" />
@@ -69,9 +70,9 @@
 
       {#each $projectStore as project}
         <div class=" column is-12">
-          <div class="card" title={project.name}>
+          <div class="card" title={project.title}>
             <header class="card-header">
-              <p class="card-header-title">{project.name}</p>
+              <p class="card-header-title">{project.title}</p>
 
               <a href="/projects/{project.id}/delete" class="card-header-icon">
                 <span class="icon">
